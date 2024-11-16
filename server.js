@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(cors());
 
-const allowedOrigins = ['*'];
+const allowedOrigins = ['https://wp-frontend-080v.onrender.com'];
 
 app.use(cors({
   origin: allowedOrigins,
