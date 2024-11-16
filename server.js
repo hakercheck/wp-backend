@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(cors());
 
-const allowedOrigins = ['https://your-vercel-frontend-url.vercel.app'];
+const allowedOrigins = ['https://wp-frontend-wheat.vercel.app'];
 
 app.use(cors({
   origin: allowedOrigins,
