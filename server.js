@@ -22,7 +22,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+//app.use(cors());
+
+const allowedOrigins = ['https://your-vercel-frontend-url.vercel.app'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // if cookies or authentication are involved
+}));
 
 app.use(cookieParser());
 
@@ -34,18 +41,9 @@ app.use('/api/vendorDisplay', vendorDisplayRoutes);
 app.use('/api/vendorSelect', vendorSelectRoutes);
 app.use('/api/order', OrderRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-  const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, '/frontend/dist')));
-
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
-  );
-} else {
-  app.get('/', (req, res) => {
-    res.send('API is running....');
-  });
-}
+app.get('/', (req, res) => {
+  res.send('API is running....');
+});
 
 app.use(notFound);
 app.use(errorHandler);
